@@ -38,12 +38,11 @@ interface TransitionItem {
 
 const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
 
-  const [direction, setDirection] = useState(DIRECTION.ChooseTempate);
+  const [direction, setDirection] = useState(DIRECTION.OnBoarding);
+  const [prevDirection, setPreDirection] = useState(DIRECTION.OnBoarding);
   const [selected, setSelected] = useState("");
-  const [mode, setMode] = useState<"out-in" | "in-out" | undefined>("out-in");
-  const [state, setState] = useState<Key | null | undefined>(1);
   const bodyRef = useRef<HTMLDivElement | null>(null);
-  const [open, setOpen] = useState(true)
+  const [animateTemplate, setAnimateTemplate] = useState(false)
   const router = useRouter();
   const transApi = useSpringRef()
 
@@ -53,12 +52,12 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
     config: config.stiff,
     from: { size: '20%', background: 'hotpink' },
     to: {
-      size: open ? '100%' : '20%',
-      background: open ? 'white' : 'hotpink',
+      size: animateTemplate ? '100%' : '20%',
+      background: animateTemplate ? 'white' : 'hotpink',
     },
   })
 
-  const transition = useTransition(open ? templateList : [], {
+  const transition = useTransition(animateTemplate ? templateList : [], {
     ref: transApi,
     trail: 400 / templateList.length,
     from: { opacity: 0, scale: 0 },
@@ -71,25 +70,32 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
     console.log('selected is:'+category);
   }
 
-  useChain(open ? [springApi, transApi] : [transApi, springApi], [
+  useChain(animateTemplate ? [springApi, transApi] : [transApi, springApi], [
     0,
-    open ? 0.1 : 0.6,
+    animateTemplate ? 0.1 : 0.6,
   ])
 
   const onNext = () => {
-    if (selected === 'AI') {
-      setDirection(DIRECTION.AIGenerate);
-    } else {
-      setDirection(DIRECTION.ManuallyGenerate); 
+    if(direction === DIRECTION.OnBoarding){
+      selected === 'AI' ? setDirection(DIRECTION.AIGenerate) : setDirection(DIRECTION.ManuallyGenerate);
+    }else if(direction === DIRECTION.AIGenerate || direction === DIRECTION.ManuallyGenerate){
+      setPreDirection(direction === DIRECTION.AIGenerate?DIRECTION.AIGenerate:DIRECTION.ManuallyGenerate);
+      setAnimateTemplate(true);
+      setDirection(DIRECTION.ChooseTempate); 
+    }else if(direction === DIRECTION.ChooseTempate){
+      router.push('../resumeCreation');
     }
-    setState((state: any) => !state);
   }
 
-  const testAnimation = () => {
-    setDirection(DIRECTION.ChooseTempate);
-    setOpen(true);
+  const onBack = () => {
+    console.log('prevDirection is:',prevDirection);
+    if(direction === DIRECTION.ChooseTempate){
+      setAnimateTemplate(false);
+      setDirection(prevDirection);
+    }else if(direction === DIRECTION.AIGenerate || direction === DIRECTION.ManuallyGenerate){
+      setDirection(DIRECTION.OnBoarding);
+    }
   }
-
 
   let bodyContent = (
     <div 
@@ -142,7 +148,6 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
         </div>
       </div>
     </div>
-    
   )
 
   //AIGenerate
@@ -197,8 +202,8 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
               })}
             </div>
             <div className='flex flex-row justify-between mt-6'>
-              <Button name="Go back" width={'w-1/3'} onClick = {()=>setDirection(DIRECTION.OnBoarding)}/>
-              <Button name="Next" width={'w-1/3'}/>
+              <Button name="Go back" width={'w-1/3'} onClick = {onBack}/>
+              <Button name="Next" width={'w-1/3'} onClick={onNext}/>
             </div>
           </div>
         </div>
@@ -259,8 +264,8 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
               })}
             </div>
             <div className='flex flex-row justify-between mt-6'>
-              <Button name="Go back" width={'w-1/3'} onClick = {()=>setDirection(DIRECTION.OnBoarding)}/>
-              <Button name="Next" width={'w-1/3'} onClick={testAnimation}/>
+              <Button name="Go back" width={'w-1/3'} onClick = {onBack}/>
+              <Button name="Next" width={'w-1/3'} onClick={onNext}/>
             </div>
           </div>
         </div>
@@ -271,21 +276,31 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
   //Choose Tempate
   if(direction === DIRECTION.ChooseTempate) {
     bodyContent = (
-      <animated.div
-        className={`${styles.item} mt-6 flex flex-row flex-wrap justify-evenly gap-6`}
-      >
-       {transition((style, item) => (
-        <animated.div className={styles.item} style={{ ...style }}>
-          <item.template {...item.props}/>
+      <div className="-mt-5">
+        <div className="flex justify-center items-center text-3xl font-bold">Please select your favorite resume template</div>
+        <hr className="mt-3 bg-slate-400"/>
+        <animated.div
+          className={`${styles.item} mt-6 flex flex-row flex-wrap justify-evenly gap-6`}
+        >
+        {transition((style, item) => (
+          <animated.div className={styles.item} style={{ ...style }}>
+            <item.template {...item.props}/>
+          </animated.div>
+        ))}
         </animated.div>
-      ))}
-      </animated.div>
+        <div className='mt-6 p-6'>
+            <div className="flex flex-row justify-between gap-2">
+              <Button name="Go back" width={'w-1/2'} onClick = {onBack}/>
+              <Button name="Next" width={'w-1/2'} onClick={onNext}/>
+            </div>
+        </div>
+      </div>
     )
   }
 
   return (
     <div className='h-full w-full bg-neutral-50 md:px-60 md:py-12'>
-      <OnBoardingHeader />
+      {direction === DIRECTION.ChooseTempate ? null : <OnBoardingHeader />}
       {bodyContent}
     </div>
   )
