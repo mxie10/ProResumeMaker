@@ -11,11 +11,12 @@ interface CreateOption {
     onClick?:(category:string) => void;
     setDirection?:Dispatch<SetStateAction<any>>;
     category:string;
+    type:string;
 }
 
 const CreateOption:React.FC<CreateOption> = (props) => {
     
-    const {icon:Icon,description,selected,onClick,setDirection,category,direction} = props;
+    const {icon:Icon,description,selected,onClick,setDirection,category,direction,type} = props;
     return (
         <Card
             className={`
@@ -34,9 +35,9 @@ const CreateOption:React.FC<CreateOption> = (props) => {
                 shadow-md
                 hover:bg-neutral-100
                 cursor-pointer
-                ${category === selected ? 'border-blue-300' : ''}
+                ${type === category ? 'border-blue-300' : ''}
             `}
-            onClick={()=>onClick?.(category)}
+            onClick={()=>onClick?.(type)}
         >
 
             {Icon && 

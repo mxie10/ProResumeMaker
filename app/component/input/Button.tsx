@@ -5,19 +5,20 @@ interface ButtonWithLabelAndIconProps {
     name?: string;
     icon?: IconType;
     width?: string;
-    other?: string;
     onClick?:()=>void;
+    bgColor?:string;
 }
 
 const CustomizedButton: React.FC<ButtonWithLabelAndIconProps> = (props) => {
 
-    const { name, icon: Icon, width, other, onClick} = props;
+    const { name, icon: Icon, width, onClick, bgColor} = props;
     return (
         <Button 
             className={`
                 relative
                 ${width?width:"w-full"}
-                ${other?other:""}
+                ${bgColor?bgColor:''}
+                hover:bg-blue-800
             `}
             onClick={onClick}
         >

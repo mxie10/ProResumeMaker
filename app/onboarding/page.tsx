@@ -20,16 +20,17 @@ import {
   animated,
   useSpringRef,
 } from '@react-spring/web'
+import { IconType } from "react-icons";
 
 
-enum DIRECTION {
-  OnBoarding = -1,
-  AIGenerate = 0,
-  ManuallyGenerate = 1,
+enum STEP {
+  OnBoarding = 0,
+  AIOrManuallyGenerate = 1,
+  // ManuallyGenerate = 1,
   ChooseTempate = 2
 }
 
-const AIPanalFields = ["Resume Name","Industry","Job Title"];
+const panalFields = ["Resume Name","Industry","Job Title"];
 
 interface TransitionItem {
   template: React.Component;
@@ -38,9 +39,9 @@ interface TransitionItem {
 
 const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
 
-  const [direction, setDirection] = useState(DIRECTION.OnBoarding);
-  const [prevDirection, setPreDirection] = useState(DIRECTION.OnBoarding);
-  const [selected, setSelected] = useState("");
+  const [step, setStep] = useState(STEP.OnBoarding);
+  const [prevDirection, setPreDirection] = useState(STEP.OnBoarding);
+  const [category, setCategory] = useState("");
   const bodyRef = useRef<HTMLDivElement | null>(null);
   const [animateTemplate, setAnimateTemplate] = useState(false)
   const router = useRouter();
@@ -66,8 +67,8 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
   })
 
   const onChosen = (category: string) => {
-    setSelected(category);
-    console.log('selected is:'+category);
+    setCategory(category);
+    console.log('category is:'+category);
   }
 
   useChain(animateTemplate ? [springApi, transApi] : [transApi, springApi], [
@@ -76,25 +77,83 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
   ])
 
   const onNext = () => {
-    if(direction === DIRECTION.OnBoarding){
-      selected === 'AI' ? setDirection(DIRECTION.AIGenerate) : setDirection(DIRECTION.ManuallyGenerate);
-    }else if(direction === DIRECTION.AIGenerate || direction === DIRECTION.ManuallyGenerate){
-      setPreDirection(direction === DIRECTION.AIGenerate?DIRECTION.AIGenerate:DIRECTION.ManuallyGenerate);
-      setAnimateTemplate(true);
-      setDirection(DIRECTION.ChooseTempate); 
-    }else if(direction === DIRECTION.ChooseTempate){
-      router.push('../resumeCreation');
-    }
+    if(step === 1) setAnimateTemplate(true);
+    step === 2 ? router.push('../resumeCreation') : setStep(step+1);
   }
 
   const onBack = () => {
-    console.log('prevDirection is:',prevDirection);
-    if(direction === DIRECTION.ChooseTempate){
-      setAnimateTemplate(false);
-      setDirection(prevDirection);
-    }else if(direction === DIRECTION.AIGenerate || direction === DIRECTION.ManuallyGenerate){
-      setDirection(DIRECTION.OnBoarding);
-    }
+    if(step === 2) setAnimateTemplate(false);
+    setStep(step-1);
+  }
+
+  interface directionModel {
+    title?:string;
+    description?:string;
+    icon?:IconType;
+  }
+
+  const DirectionModel:React.FC<directionModel> = (props) => {
+    const {title,description,icon:Icon} = props;
+    return (
+      <div
+        className={`
+            mt-14
+            flex
+            flex-row
+       `}
+      >
+        <div 
+          className='
+            hidden
+            md:w-1/4
+            md:block
+          '
+        >
+           {Icon && <Icon className='w-36 h-36' />}
+        </div>
+        <div 
+          className='
+            bg-white 
+            w-full
+            md:w-3/4 
+            border-2 
+            border-neutral-200 
+            p-8 
+            rounded-lg 
+            shadow-md
+            box-border
+        '>
+          <div className='mx-2'>
+            <div className='text-2xl border-b-2 pb-5'>
+              {/* Craft your own resume */}
+              {title}
+            </div>
+            <div className='text-neutral-500 mt-4 text-lg'>
+            {/* Input your career details, let our AI tools optimize and elevate your profile, and enjoy the flexibility to edit and refine anytime you wish. */}
+            {description}
+            </div>
+            <div 
+              className='
+                flex
+                flex-row
+                flex-wrap
+                gap-2
+                justify-between
+                mt-3
+              '
+            >
+              {panalFields.map((item)=>{
+                return <Input label={item} otherStyle="mt-2" textColor={'text-neutral-600'}/>
+              })}
+            </div>
+            <div className='flex flex-row justify-between mt-6'>
+              <Button name="Go back" width={'w-1/3'} onClick = {onBack}/>
+              <Button name="Next" width={'w-1/3'} onClick={onNext}/>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   let bodyContent = (
@@ -117,17 +176,15 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
         <CreateOption
           icon={GiVintageRobot}
           description="Generate a example Resume"
-          category="AI"
-          direction={DIRECTION.AIGenerate}
-          selected={selected}
+          type="AI"
+          category={category}
           onClick={(category) => onChosen(category)}
         />
         <CreateOption
           icon={BsPencilSquare}
           description="Customize My Resume"
-          category="Manual"
-          direction={DIRECTION.ManuallyGenerate}
-          selected={selected}
+          type="Manual"
+          category={category}
           onClick={(category) => onChosen(category)}
         />
       </div>
@@ -150,131 +207,20 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
     </div>
   )
 
-  //AIGenerate
-  if(direction === DIRECTION.AIGenerate){
+  //Manually Generate or AI Generate
+  if(step === STEP.AIOrManuallyGenerate) {
+    let title = category === 'AI' ? 'Generate your template resume' : 'Craft your own resume';
+    let description = category === 'AI' ? 
+      'Generate a resume using our template with just a few details. Edit anytime later.' 
+    : 'Input your career details, let our AI tools optimize and elevate your profile, and enjoy the flexibility to edit and refine anytime you wish.';
+    let icon = category === 'AI' ? BsFillBoxFill :FaPencilAlt;
     bodyContent = (
-      <div
-        className={`
-            mt-14
-            flex
-            flex-row
-       `}
-      >
-        <div 
-          className='
-            hidden
-            md:w-1/4
-            md:block
-          '
-        >
-          <BsFillBoxFill className=' w-36 h-36'/>
-        </div>
-        <div 
-          className='
-            bg-white 
-            w-full
-            md:w-3/4 
-            border-2 
-            border-neutral-200 
-            p-8 
-            rounded-lg 
-            shadow-md
-        '>
-          <div className='mx-2'>
-            <div className='text-2xl border-b-2 pb-5'>
-              Generate your template resume
-            </div>
-            <div className='text-neutral-500 mt-4 text-lg'>
-              Craft a resume using our template with just a few details. Edit anytime later.
-            </div>
-            <div 
-              className='
-                flex
-                flex-row
-                flex-wrap
-                gap-2
-                justify-between
-                mt-3
-              '
-            >
-              {AIPanalFields.map((item)=>{
-                return <Input label={item} otherStyle="mt-2" textColor={'text-neutral-600'}/>
-              })}
-            </div>
-            <div className='flex flex-row justify-between mt-6'>
-              <Button name="Go back" width={'w-1/3'} onClick = {onBack}/>
-              <Button name="Next" width={'w-1/3'} onClick={onNext}/>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  //ManuallyGenerate
-  if(direction === DIRECTION.ManuallyGenerate) {
-    bodyContent = (
-      <div
-        className={`
-            mt-14
-            flex
-            flex-row
-       `}
-      >
-        <div 
-          className='
-            hidden
-            md:w-1/4
-            md:block
-          '
-        >
-          <FaPencilAlt className=' w-36 h-36'/>
-        </div>
-        <div 
-          className='
-            bg-white 
-            w-full
-            md:w-3/4 
-            border-2 
-            border-neutral-200 
-            p-8 
-            rounded-lg 
-            shadow-md
-            box-border
-        '>
-          <div className='mx-2'>
-            <div className='text-2xl border-b-2 pb-5'>
-              Craft your own resume
-            </div>
-            <div className='text-neutral-500 mt-4 text-lg'>
-            Input your career details, let our AI tools optimize and elevate your profile, and enjoy the flexibility to edit and refine anytime you wish.
-            </div>
-            <div 
-              className='
-                flex
-                flex-row
-                flex-wrap
-                gap-2
-                justify-between
-                mt-3
-              '
-            >
-              {AIPanalFields.map((item)=>{
-                return <Input label={item} otherStyle="mt-2" textColor={'text-neutral-600'}/>
-              })}
-            </div>
-            <div className='flex flex-row justify-between mt-6'>
-              <Button name="Go back" width={'w-1/3'} onClick = {onBack}/>
-              <Button name="Next" width={'w-1/3'} onClick={onNext}/>
-            </div>
-          </div>
-        </div>
-      </div>
+      <DirectionModel title={title} description={description} icon = {icon}/>
     )
   }
 
   //Choose Tempate
-  if(direction === DIRECTION.ChooseTempate) {
+  if(step === STEP.ChooseTempate) {
     bodyContent = (
       <div className="-mt-5">
         <div className="flex justify-center items-center text-3xl font-bold">Please select your favorite resume template</div>
@@ -300,7 +246,7 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
 
   return (
     <div className='h-full w-full bg-neutral-50 md:px-60 md:py-12'>
-      {direction === DIRECTION.ChooseTempate ? null : <OnBoardingHeader />}
+      {step === STEP.ChooseTempate ? null : <OnBoardingHeader />}
       {bodyContent}
     </div>
   )

@@ -23,19 +23,19 @@ const Home = () => {
         border-neutral-100
         "
       >
-        <div className="text-2xl font-bold">
+        <div className="text-2xl font-bold text-blue-950">
           Dashboard
         </div>
-        <div className="flex flex-row items-center justify-center">
+        <div className="flex flex-row items-center gap-2">
           <Input placeHolder="Search..." shadow/>
-          <Button name="+ Add New" width="w-1/3" other="ml-2" onClick={() => router.push('/onboarding')}/>
+          <Button name="+ Add New" width="w-1/3" bgColor="bg-blue-700" onClick={() => router.push('/onboarding')}/>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="h-full w-full bg-neutral-50">
+    <div className="min-h-full w-full bg-neutral-50">
       <Header/>
       <div className="
         px-20
@@ -44,11 +44,21 @@ const Home = () => {
         flex-col
         gap-12
         lg:flex-row
+        lg:justify-evenly
+        lg:flex-wrap
       ">
           <ListingCard/>
           <ListingCard/>
           <ListingCard/>
+          <ListingCard/>
+          <ListingCard/>
+          <ListingCard/>
       </div>
+       {/* footer */}
+       <div className="relative mt-10">
+          <hr className="w-full bg-neutral-400"/>
+          <div className="flex justify-center mt-1 text-neutral-400">This is a place holder which used to show some info such as copy right</div>
+        </div>
     </div>
   )
 }
