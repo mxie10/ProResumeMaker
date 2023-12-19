@@ -29,7 +29,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <html lang="en">
       <body
-        className="min-h-screen w-full"
+        className="w-full"
       >
         {user ? <LayoutBody /> : <Register />}
       </body>

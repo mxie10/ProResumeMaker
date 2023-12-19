@@ -30,7 +30,6 @@ const ListingCard: React.FC<ListingCardProps> = (props) => {
             w-full
             gap-7
             shadow-md
-            
         `}
         >
             <div className='w-1/3 '>

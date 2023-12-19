@@ -9,7 +9,6 @@ import Button from '../component/input/Button';
 import OnBoardingHeader from "../component/header/OnboardingHeader";
 import { useRef, useState } from 'react';
 import Input from '../component/input/Input';
-import templateList from '../static/template';
 import templatesList from '../static/template';
 import styles from '../styles.module.css'
 import {
@@ -60,7 +59,7 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
 
   const transitions = useTransition(animateTemplate ? templatesList : [], {
     ref: transApi,
-    trail: 400 / templateList.length,
+    trail: 400 / templatesList.length,
     from: { opacity: 0, scale: 0 },
     enter: { opacity: 1, scale: 1 },
     leave: { opacity: 0, scale: 0 },
