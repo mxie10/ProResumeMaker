@@ -9,8 +9,8 @@ import Button from '../component/input/Button';
 import OnBoardingHeader from "../component/header/OnboardingHeader";
 import { useRef, useState } from 'react';
 import Input from '../component/input/Input';
-import  { Key } from "react";
 import templateList from '../static/template';
+import templatesList from '../static/template';
 import styles from '../styles.module.css'
 import {
   useTransition,
@@ -58,7 +58,7 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
     },
   })
 
-  const transition = useTransition(animateTemplate ? templateList : [], {
+  const transitions = useTransition(animateTemplate ? templatesList : [], {
     ref: transApi,
     trail: 400 / templateList.length,
     from: { opacity: 0, scale: 0 },
@@ -228,9 +228,11 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
         <animated.div
           className={`${styles.item} mt-6 flex flex-row flex-wrap justify-evenly gap-6`}
         >
-        {transition((style, item) => (
+        {/* <item.template {...item.props}/> */}
+        {transitions((style, item) => (
           <animated.div className={styles.item} style={{ ...style }}>
-            <item.template {...item.props}/>
+              <img className = 'w-full h-full lg:w-256 lg:h-319' src={item.source}/>
+              {/* <img src={item.source} style={{width:'50%',height:'auto', boxSizing:'border-box'}} /> */}
           </animated.div>
         ))}
         </animated.div>
@@ -245,7 +247,7 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
   }
 
   return (
-    <div className='h-full w-full bg-neutral-50 md:px-60 md:py-12'>
+    <div className='h-screen w-full bg-neutral-50 md:px-60 md:py-12'>
       {step === STEP.ChooseTempate ? null : <OnBoardingHeader />}
       {bodyContent}
     </div>

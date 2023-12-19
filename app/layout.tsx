@@ -19,7 +19,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   const LayoutBody = () => {
     return (
-      <div className="min-h-screen bg-neutral-50">
+      <div className="bg-neutral-50">
         <Navbar/>
         {children}
       </div>

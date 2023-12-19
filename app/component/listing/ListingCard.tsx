@@ -7,6 +7,7 @@ import { BsTvFill } from 'react-icons/bs';
 import { BsClockHistory } from 'react-icons/bs';
 import ResumeTypeLabel from '../ResumeTypeLabel';
 import EditingOption from './EditingOption';
+import Template1 from '@/app/template/template1';
 
 interface ListingCardProps {
     bgColor?:string;
@@ -34,6 +35,7 @@ const ListingCard: React.FC<ListingCardProps> = (props) => {
         >
             <div className='w-1/3 '>
                 <Image className='' height='40' width='200' alt="Avater" src={"/images/resumeSample.jpg"} />
+                {/* <Template1 zoom={0.15}/> */}
             </div>
             <div 
                 className='

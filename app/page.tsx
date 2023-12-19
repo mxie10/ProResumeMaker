@@ -35,33 +35,25 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-full w-full bg-neutral-50">
-      <Header/>
-      <div className="
-        px-20
-        py-4
-        flex
-        flex-col
-        gap-12
-        lg:flex-row
-        lg:justify-evenly
-        lg:flex-wrap
-      ">
-          <ListingCard/>
-          <ListingCard/>
-          <ListingCard/>
-          <ListingCard/>
-          <ListingCard/>
-          <ListingCard/>
-      </div>
-       {/* footer */}
-       <div className="relative mt-10">
-          <hr className="w-full bg-neutral-400"/>
-          <div className="flex justify-center mt-1 text-neutral-400">This is a place holder which used to show some info such as copy right</div>
+    <div className="min-h-screen flex flex-col bg-neutral-50">
+      <div className="flex-grow">
+        <Header />
+        <div className="px-20 py-4 flex flex-col gap-12 lg:flex-row lg:flex-wrap">
+          <ListingCard />
+          <ListingCard />
+          <ListingCard />
         </div>
+      </div>
+      {/* footer */}
+      <div className="relative mt-10">
+        <hr className="w-full bg-neutral-400" />
+        <div className="flex justify-center mt-1 text-neutral-400">
+          This is a placeholder which used to show some info such as copyright
+        </div>
+      </div>
     </div>
-  )
-}
+  );
+};
 
 export default Home;
 
