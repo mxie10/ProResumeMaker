@@ -246,7 +246,7 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
   }
 
   return (
-    <div className='h-screen w-full bg-neutral-50 md:px-60 md:py-12'>
+    <div className='w-full bg-neutral-50 md:px-60 md:pt-12'>
       {step === STEP.ChooseTempate ? null : <OnBoardingHeader />}
       {bodyContent}
     </div>

@@ -5,34 +5,47 @@ interface ButtonWithLabelAndIconProps {
     name?: string;
     icon?: IconType;
     width?: string;
-    onClick?:()=>void;
+    height?:string;
     bgColor?:string;
+    color?:string;
+    rounded?:string;
+    border?:string;
+    borderColor?:string;
+    fontSize?:string;
+    onClick?:()=>void;
 }
 
 const CustomizedButton: React.FC<ButtonWithLabelAndIconProps> = (props) => {
 
-    const { name, icon: Icon, width, onClick, bgColor} = props;
+    const { name, icon: Icon, width, onClick, bgColor,color,rounded,border,borderColor,fontSize,height} = props;
     return (
         <Button 
             className={`
                 relative
-                ${width?width:"w-full"}
+                ${width?width:'w-full'}
+                ${height?height:'h-full'}
                 ${bgColor?bgColor:''}
                 hover:bg-blue-800
+                ${color?color:'white'}
+                ${rounded?rounded:''}
+                ${border?border:''}
+                ${borderColor?borderColor:''}
+                ${fontSize?fontSize:''}
+                ${Icon?'flex flex-row items-center justify-evenly':''}
             `}
             onClick={onClick}
         >
-            {Icon && (
+             {Icon && (
                 <Icon
-                    size={24}
+                    size={18}
                     className="
-                        absolute
-                        left-4
-                        top-3
                     "
                 />
             )}
-            <div className="font-bold">{name}</div>
+            <div className="font-bold">
+                {name}
+            </div>
+           
         </Button>
     )
 }

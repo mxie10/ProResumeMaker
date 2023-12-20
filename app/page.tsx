@@ -35,15 +35,14 @@ const Home = () => {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-neutral-50">
-      <div className="flex-grow">
+    <div className="flex flex-col bg-neutral-50">
         <Header />
         <div className="px-20 py-4 flex flex-col gap-12 lg:flex-row lg:flex-wrap">
           <ListingCard />
           <ListingCard />
           <ListingCard />
+          
         </div>
-      </div>
       {/* footer */}
       <div className="relative mt-10">
         <hr className="w-full bg-neutral-400" />

@@ -19,8 +19,8 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   const LayoutBody = () => {
     return (
-      <div className="bg-neutral-50">
-        <Navbar/>
+      <div className="bg-neutral-50 min-h-screen flex flex-col">
+        <Navbar />
         {children}
       </div>
     )
@@ -28,9 +28,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="en">
-      <body
-        className="w-full"
-      >
+      <body className="min-h-screen flex flex-col">
         {user ? <LayoutBody /> : <Register />}
       </body>
     </html>

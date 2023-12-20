@@ -26,10 +26,9 @@ const Template2: React.FC<Template1Props> = ({
                     border-2
                     pb-2
                 '
-            style={{zoom:zoom}}
         >
             <div className='flex flex-row w-full h-full'>
-                <div className={`w-1/3 ${tempbgcolor?tempbgcolor:' bg-orange-700'}`}>
+                <div className={`w-1/3 ${tempbgcolor?tempbgcolor:' bg-orange-700'} px-2`}>
                     <div className='mt-5 ml-2'>
                         {/* candidate name */}
                         <div className='text-xl flex flex-col text-white'>

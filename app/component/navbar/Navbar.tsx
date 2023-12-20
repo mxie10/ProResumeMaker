@@ -10,14 +10,13 @@ const Navbar = () => {
     return (
         <div
             className='
-                h-full 
                 w-full
                 flex
                 flex-row
                 justify-between
-                p-5
+                p-3
                 border-b-2
-              border-gray-100
+                border-gray-00
               bg-neutral-50
             '
         >
