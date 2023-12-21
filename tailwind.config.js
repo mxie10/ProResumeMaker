@@ -21,6 +21,20 @@ module.exports = {
       }
     },
     extend: {
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
+      },
       fontFamily: {
         sans: ["var(--font-sans)", ...fontFamily.sans],
       },
@@ -50,7 +64,7 @@ module.exports = {
         '600':'600px',
         '630':'630px',
         '650':'650px',
-        '660':'660px',
+        '670':'670px',
         '700':'700px',
         '750':'750px',
         '9/10':'89%'

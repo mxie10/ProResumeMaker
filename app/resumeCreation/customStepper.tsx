@@ -11,6 +11,7 @@ const CustomStepper = () => {
                 { label: 'Skills' },
             ]}
             activeStep={0} 
+            styleConfig={{labelFontSize:12}}
         />
     )
   };

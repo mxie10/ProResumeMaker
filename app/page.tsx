@@ -44,12 +44,6 @@ const Home = () => {
           
         </div>
       {/* footer */}
-      <div className="relative mt-10">
-        <hr className="w-full bg-neutral-400" />
-        <div className="flex justify-center mt-1 text-neutral-400">
-          This is a placeholder which used to show some info such as copyright
-        </div>
-      </div>
     </div>
   );
 };

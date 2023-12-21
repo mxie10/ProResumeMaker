@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label"
+import { Label } from "@/components/ui/label";
 import { HTMLInputTypeAttribute } from "react";
 
 interface InputWithLabelProps {
@@ -11,18 +11,22 @@ interface InputWithLabelProps {
     textSize?:string;
     textColor?:string;
     otherStyle?:string;
+    width?:string;
+    bgColor?:string;
+    multiple?:boolean;
 }
 
 const CustomizedInput:React.FC<InputWithLabelProps> = (props) => {
-    const { label,inputType,inputID,placeHolder,shadow,textSize,textColor,otherStyle } = props;
+    const { label,inputType,inputID,placeHolder,shadow,textSize,textColor,otherStyle,width,bgColor,multiple} = props;
     return (
         <div 
             className={`
                 grid 
-                w-72
                 gap-1.5
+                mt-1
                 ${shadow?"shadow-md":""}
                 ${otherStyle?otherStyle:""}
+                ${width?width:'w-72'}
             `}
         >
             <Label 
@@ -34,7 +38,7 @@ const CustomizedInput:React.FC<InputWithLabelProps> = (props) => {
                 >
                     {label}
             </Label>
-            <Input type={inputType} id={inputID} placeholder={placeHolder} />
+            <Input type={inputType} id={inputID} placeholder={placeHolder} className={`${bgColor?bgColor:''}`}/>
         </div>
 
     )

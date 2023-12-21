@@ -25,7 +25,6 @@ import { IconType } from "react-icons";
 enum STEP {
   OnBoarding = 0,
   AIOrManuallyGenerate = 1,
-  // ManuallyGenerate = 1,
   ChooseTempate = 2
 }
 
@@ -235,7 +234,7 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
           </animated.div>
         ))}
         </animated.div>
-        <div className='mt-6 p-6'>
+        <div className='p-6'>
             <div className="flex flex-row justify-between gap-2">
               <Button name="Go back" width={'w-1/2'} onClick = {onBack}/>
               <Button name="Next" width={'w-1/2'} onClick={onNext}/>

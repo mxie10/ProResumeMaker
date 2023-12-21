@@ -32,6 +32,8 @@ const CustomizedButton: React.FC<ButtonWithLabelAndIconProps> = (props) => {
                 ${borderColor?borderColor:''}
                 ${fontSize?fontSize:''}
                 ${Icon?'flex flex-row items-center justify-evenly':''}
+                shadow-md
+                hover:bg-slate-200
             `}
             onClick={onClick}
         >
