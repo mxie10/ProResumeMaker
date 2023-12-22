@@ -21,12 +21,12 @@ const CustomizedInput:React.FC<InputWithLabelProps> = (props) => {
     return (
         <div 
             className={`
-                grid 
                 gap-1.5
                 mt-1
+                w-full
+                lg:${width}
                 ${shadow?"shadow-md":""}
                 ${otherStyle?otherStyle:""}
-                ${width?width:'w-72'}
             `}
         >
             <Label 

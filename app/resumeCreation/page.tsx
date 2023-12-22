@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Margin, Options, usePDF } from 'react-to-pdf';
 import Template2 from '../template/template2';
 import dynamic from 'next/dynamic';
@@ -7,9 +7,9 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Button from '../component/input/Button';
 import TemplateList from './TemplateList';
-import CustomizedInput from '../component/input/Input';
-import CustomizedTextArea from '../component/input/TextArea';
 import Step1 from './steps/step1';
+import CustomizedStepper from './customStepper';
+import Step2 from './steps/step2';
 
 enum STEP {
   Summary = 0,
@@ -19,18 +19,10 @@ enum STEP {
   Skills = 4
 }
 
-const EditBody = (
-  <div>
-
-  </div>
-)
-
 const Page = () => {
-  const [isLoading, setIsLoading] = React.useState(true);
+  const [isLoading, setIsLoading] = useState(true);
+  const [step,setStep] = useState(1);
   const { toPDF, targetRef } = usePDF({ filename: 'test.pdf' });
-  const StepperComponent = dynamic(() => import('./customStepper'), {
-    ssr: false,
-  });
 
   const options: Options = {
     page: {
@@ -52,35 +44,61 @@ const Page = () => {
     toPDF(options);
   };
 
+  const onNext = () => {
+    setStep(step=>step+1);
+  }
+
+  const onBack = () => {
+    setStep(step=>step-1);
+  }
+
+  let stepBody = (
+    <Step1/>
+  )
+
+  if(step === 1){
+    stepBody = (
+      <Step2/>
+    )
+  }
 
   const bodyConent = (
     <div className='flex flex-row justify-between'>
       {/* left side */}
       <div className='w-full lg:w-1/2 bg-white px-1 py-2 md:px-10'>
-        <div className='-mt-3'>
-          <StepperComponent />
+        <div className='mt-2'>
+          <CustomizedStepper />
         </div>
-        <div className='w-full px-10 -mt-4 bg-white shadow-lg rounded-md border-2'>
-          <div className='h-auto flex flex-row justify-between items-center py-2'>
-            <Button
-              name='<--Back'
-              width='w-28'
-              height='h-8'
-              bgColor='bg-white'
-              color='text-blue-500'
-              borderColor='border-slate-300'
-            />
-            <div className='font-bold text-xl'>Summary</div>
-            <Button
-              name='Next-->'
-              width='w-28'
-              height='h-8'
-              bgColor='bg-white'
-              color='text-blue-500'
-              borderColor='border-slate-300'
-            />
+        <div className='w-ful h-600  px-10 mt-2 bg-white shadow-lg rounded-md border-2'>
+          <div className='h-auto flex flex-row justify-between items-center py-2 relative mt-6'>
+            {step!==0? 
+              <div className='absolute left-1'>
+                <Button
+                  name='<--Back'
+                  width='w-28'
+                  height='h-8'
+                  bgColor='bg-white'
+                  color='text-blue-500'
+                  borderColor='border-slate-300'
+                  onClick={onNext}
+              /></div>:null
+            }
+            <div className='hidden lg:block font-bold text-lg absolute left-1/3'>Personal Details</div>
+            <div className='absolute right-1'>
+              <Button
+                name='Next-->'
+                width='w-28'
+                height='h-8'
+                bgColor='bg-white'
+                color='text-blue-500'
+                borderColor='border-slate-300'
+                onClick={onBack}
+              />
+            </div>
           </div>
-          <Step1 />
+          <div className='mt-5'>
+            {stepBody}
+          </div>
         </div>
       </div>
 
@@ -135,7 +153,7 @@ const Page = () => {
   )
 
   return (
-    <div className='w-full'>
+    <div className='w-full h-full'>
       {isLoading ? <p>Loading....</p> : bodyConent}
     </div>
   )

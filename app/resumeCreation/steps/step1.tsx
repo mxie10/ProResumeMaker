@@ -49,11 +49,10 @@ const Step1 = () => {
                                     <CustomizedInput
                                         key={index}
                                         label={item.title}
-                                        width='w-64'
                                         textColor='text-neutral-500'
                                         textSize='text-md'
                                         bgColor='bg-neutral-100'
-
+                                        width='w-64'
                                     />
                                 ))}
                             </div>
@@ -61,7 +60,7 @@ const Step1 = () => {
                     </AccordionItem>
                 </Accordion>
                 <CustomizedTextArea 
-                    label='Summary' 
+                    label='Professional Summary' 
                     width='w-full' 
                     height='h-44' 
                     textColor='text-neutral-500' 
@@ -70,6 +69,9 @@ const Step1 = () => {
                     addtionalText='Get stucked? Try  '
                     link={linkToAIOptimization}
                 />
+                <div className='text-neutral-500 text-xs'>
+                    We highly recommend leveraging AI to enhance your professional experience summary, encompassing the correction of grammar errors, optimization of work history, and improvement of overall readability.
+                </div>
             </div>
         </>
     )

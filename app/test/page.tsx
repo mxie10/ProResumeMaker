@@ -1,8 +1,9 @@
 'use client';
 
-import React, { Key, useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import { SwitchTransition, CSSTransition } from "react-transition-group";
-import { Button, Form } from "react-bootstrap";
+import { Alert, Button, Container, Form } from "react-bootstrap";
+
 
 const modes = ["out-in", "in-out"];
 
@@ -29,11 +30,11 @@ export default function App() {
 // }
 
 
-  const [mode, setMode] = React.useState<"out-in" | "in-out" | undefined>("out-in");
-  const [state, setState] = React.useState<Key | null | undefined>(1);
-  const helloRef = React.useRef<HTMLDivElement | null>(null);
-  const goodbyeRef = React.useRef<HTMLDivElement | null>(null);
-  const nodeRef = state ? helloRef : goodbyeRef;
+  // const [mode, setMode] = React.useState<"out-in" | "in-out" | undefined>("out-in");
+  // const [state, setState] = React.useState<Key | null | undefined>(1);
+  // const helloRef = React.useRef<HTMLDivElement | null>(null);
+  // const goodbyeRef = React.useRef<HTMLDivElement | null>(null);
+  // const nodeRef = state ? helloRef : goodbyeRef;
 
 //   const outerDivRef = useRef<any>();
 //   const contentRef = useRef<any>(null);
@@ -50,8 +51,8 @@ export default function App() {
 //     }
 //   }, []);
 
-  let com1 = <div>test1</div>
-  let com2 = <div>test2</div>
+  // let com1 = <div>test1</div>
+  // let com2 = <div>test2</div>
 
 
 //   const userData = {
@@ -95,27 +96,49 @@ export default function App() {
 // }
 
 
+const [showButton, setShowButton] = useState(true);
+  const [showMessage, setShowMessage] = useState(false);
+  const nodeRef = useRef(null);
   return (
-    <>
-      <div>
-        <SwitchTransition mode={mode}>
-          <CSSTransition
-            key={state}
-            nodeRef={nodeRef}
-            addEndListener={(done) => {
-              nodeRef.current?.addEventListener("transitionend", done, false);
-            }}
-            classNames="fade"
+    <Container style={{ paddingTop: '2rem' }}>
+      {showButton && (
+        <Button
+          onClick={() => setShowMessage(true)}
+          size="lg"
+        >
+          Show Message
+        </Button>
+      )}
+      <CSSTransition
+        in={showMessage}
+        nodeRef={nodeRef}
+        timeout={300}
+        classNames="alert"
+        unmountOnExit
+        onEnter={() => setShowButton(false)}
+        onExited={() => setShowButton(true)}
+      >
+        <Alert
+          ref={nodeRef}
+          variant="primary"
+          dismissible
+          onClose={() => setShowMessage(false)}
+        >
+          <Alert.Heading>
+            Animated alert message
+          </Alert.Heading>
+          <p>
+            This alert message is being transitioned in and
+            out of the DOM.
+          </p>
+          <Button
+            variant="primary"
+            onClick={() => setShowMessage(false)}
           >
-            <div ref={nodeRef} className="button-container">
-              <Button onClick={() => setState((state: any) => !state)}>      
-                {state ? com1 : com2}
-              </Button>
-            </div>
-          </CSSTransition>
-        </SwitchTransition>
-      </div>
-      <div></div>
-    </>
+            Close
+          </Button>
+        </Alert>
+      </CSSTransition>
+    </Container>
   );
 }

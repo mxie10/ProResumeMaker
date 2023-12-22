@@ -9,6 +9,9 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.1",
+    "@emotion/styled": "^11.11.0",
+    "@mui/material": "^5.15.1",
     "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-slot": "^1.0.2",
@@ -26,6 +29,7 @@
     "react-bootstrap": "^2.9.1",
     "react-dom": "18.2.0",
     "react-form-stepper": "^2.0.3",
+    "react-hook-form": "^7.49.2",
     "react-icons": "^4.11.0",
     "react-spring": "^9.7.3",
     "react-to-pdf": "^1.0.1",

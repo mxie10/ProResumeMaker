@@ -4,11 +4,14 @@ import { useRouter } from "next/navigation";
 import Input from "./component/input/Input";
 import Button from "./component/input/Button";
 import ListingCard from "./component/listing/ListingCard";
+import { useGlobalContext } from "./context/useContext";
 
 const Home = () => {
 
   const router = useRouter();
-
+  const { watch } = useGlobalContext();
+  const roomCount = watch('roomCount');
+  console.log('roomCount=',roomCount);
   const Header = () => {
     return (
       <div 
@@ -26,8 +29,8 @@ const Home = () => {
         <div className="text-2xl font-bold text-blue-950">
           Dashboard
         </div>
-        <div className="flex flex-row items-center gap-2">
-          <Input placeHolder="Search..." shadow/>
+        <div className="flex flex-row items-center gap-2 w-1/3">
+          <Input placeHolder="Search..." shadow width="w-1/2"/>
           <Button name="+ Add New" width="w-1/3" bgColor="bg-blue-700" onClick={() => router.push('/onboarding')}/>
         </div>
       </div>
