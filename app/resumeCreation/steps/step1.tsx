@@ -23,7 +23,7 @@ const additionalInfo = [
     { title: 'Province' },
     { title: 'Country' },
     { title: 'Zip Code' },
-    { title: 'Date of Birth' },
+    { title: 'Date of Birth',type:'date' },
     { title: 'Age' },
 ]
 
@@ -34,17 +34,24 @@ const Step1 = () => {
 
     return (
         <>
-            <div className='h-535 overflow-y-scroll no-scrollbar bg-white px-1 mt-2 pb-6'>
-                <div className='flex flex-row flex-wrap justify-between'>
+            <div className='h-535 overflow-y-scroll no-scrollbar bg-white mt-2 pb-6'>
+                <div className='flex flex-row flex-wrap justify-between px-1'>
                     {primaryInfo.map((item, index) => (
-                        <CustomizedInput key={index} label={item.title} width='w-64' textColor='text-neutral-500' textSize='text-md' bgColor='bg-neutral-100' />
+                        <CustomizedInput 
+                            key={index} 
+                            label={item.title} 
+                            width='w-64' 
+                            textColor='text-neutral-500' 
+                            textSize='text-md' 
+                            bgColor='bg-neutral-100' 
+                        />
                     ))}
                 </div>
                 <Accordion type="single" collapsible>
                     <AccordionItem value="item-1">
                         <AccordionTrigger className='text-blue-500 text-md'>Additional Info</AccordionTrigger>
                         <AccordionContent>
-                            <div className='flex flex-row flex-wrap justify-between'>
+                            <div className='flex flex-row flex-wrap justify-between px-1'>
                                 {additionalInfo.map((item, index) => (
                                     <CustomizedInput
                                         key={index}
@@ -52,23 +59,25 @@ const Step1 = () => {
                                         textColor='text-neutral-500'
                                         textSize='text-md'
                                         bgColor='bg-neutral-100'
-                                        width='w-64'
+                                        inputType={item.type}
                                     />
                                 ))}
                             </div>
                         </AccordionContent>
                     </AccordionItem>
                 </Accordion>
-                <CustomizedTextArea 
-                    label='Professional Summary' 
-                    width='w-full' 
-                    height='h-44' 
-                    textColor='text-neutral-500' 
-                    textSize='text-md' 
-                    bgColor='bg-neutral-100' 
-                    addtionalText='Get stucked? Try  '
-                    link={linkToAIOptimization}
-                />
+                <div className='px-1'>
+                    <CustomizedTextArea 
+                        label='Professional Summary' 
+                        width='w-full' 
+                        height='h-44' 
+                        textColor='text-neutral-500' 
+                        textSize='text-md' 
+                        bgColor='bg-neutral-100' 
+                        addtionalText='Get stucked? Try  '
+                        link={linkToAIOptimization}
+                    />
+                </div>
                 <div className='text-neutral-500 text-xs'>
                     We highly recommend leveraging AI to enhance your professional experience summary, encompassing the correction of grammar errors, optimization of work history, and improvement of overall readability.
                 </div>

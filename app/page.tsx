@@ -9,9 +9,6 @@ import { useGlobalContext } from "./context/useContext";
 const Home = () => {
 
   const router = useRouter();
-  const { watch } = useGlobalContext();
-  const roomCount = watch('roomCount');
-  console.log('roomCount=',roomCount);
   const Header = () => {
     return (
       <div 

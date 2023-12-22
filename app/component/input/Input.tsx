@@ -24,7 +24,7 @@ const CustomizedInput:React.FC<InputWithLabelProps> = (props) => {
                 gap-1.5
                 mt-1
                 w-full
-                lg:${width}
+                lg:w-64
                 ${shadow?"shadow-md":""}
                 ${otherStyle?otherStyle:""}
             `}
@@ -32,7 +32,7 @@ const CustomizedInput:React.FC<InputWithLabelProps> = (props) => {
             <Label 
                 htmlFor={inputID} 
                 className={`
-                    ${textSize?textSize:'font-medium'} 
+                    ${textSize?textSize:'text-md'} 
                     ${textColor?textColor:''}
                 `}
                 >

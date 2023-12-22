@@ -1,4 +1,4 @@
-import { ReactNode, createContext, useContext } from "react";
+import { Dispatch, ReactNode, SetStateAction, createContext, useContext, useState } from "react";
 import { FieldValues, FormState, UseFormHandleSubmit, UseFormRegister, UseFormReset, UseFormSetValue, UseFormWatch, useForm } from "react-hook-form";
 
 type ContextType = {
@@ -6,12 +6,15 @@ type ContextType = {
     handleSubmit:UseFormHandleSubmit<FieldValues, undefined>,
     setValue:UseFormSetValue<FieldValues>,
     watch:UseFormWatch<FieldValues>,
-    reset:UseFormReset<FieldValues>
+    reset:UseFormReset<FieldValues>,
+    resuCreateStep:number,
+    setResuCreateStep:Dispatch<SetStateAction<number>>
 }
 
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+    const [resuCreateStep, setResuCreateStep] = useState(0);
     const {
         register,
         handleSubmit,
@@ -45,7 +48,9 @@ export const ContextProvider: React.FC<{ children: ReactNode }> = ({ children })
         handleSubmit:handleSubmit,
         setValue:setValue,
         watch:watch,
-        reset:reset
+        reset:reset,
+        resuCreateStep:resuCreateStep,
+        setResuCreateStep:setResuCreateStep
     };
   
     return <Context.Provider value={contextValue}>{children}</Context.Provider>;

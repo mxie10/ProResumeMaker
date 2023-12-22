@@ -10,6 +10,7 @@ import TemplateList from './TemplateList';
 import Step1 from './steps/step1';
 import CustomizedStepper from './customStepper';
 import Step2 from './steps/step2';
+import { useGlobalContext } from '../context/useContext';
 
 enum STEP {
   Summary = 0,
@@ -21,8 +22,10 @@ enum STEP {
 
 const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [step,setStep] = useState(1);
+  const { resuCreateStep, setResuCreateStep } = useGlobalContext();
   const { toPDF, targetRef } = usePDF({ filename: 'test.pdf' });
+
+  const header = ['Personal Details','Education Info','Work Experience','Project Experience','Skills'];
 
   const options: Options = {
     page: {
@@ -45,18 +48,18 @@ const Page = () => {
   };
 
   const onNext = () => {
-    setStep(step=>step+1);
+    setResuCreateStep((step)=>step+1);
   }
 
   const onBack = () => {
-    setStep(step=>step-1);
+    setResuCreateStep((step)=>step-1);
   }
 
   let stepBody = (
     <Step1/>
   )
 
-  if(step === 1){
+  if(resuCreateStep === STEP.Education){
     stepBody = (
       <Step2/>
     )
@@ -71,7 +74,7 @@ const Page = () => {
         </div>
         <div className='w-ful h-600  px-10 mt-2 bg-white shadow-lg rounded-md border-2'>
           <div className='h-auto flex flex-row justify-between items-center py-2 relative mt-6'>
-            {step!==0? 
+            {resuCreateStep!==0? 
               <div className='absolute left-1'>
                 <Button
                   name='<--Back'
@@ -80,10 +83,10 @@ const Page = () => {
                   bgColor='bg-white'
                   color='text-blue-500'
                   borderColor='border-slate-300'
-                  onClick={onNext}
+                  onClick={onBack}
               /></div>:null
             }
-            <div className='hidden lg:block font-bold text-lg absolute left-1/3'>Personal Details</div>
+            <div className='hidden lg:block font-bold text-lg absolute' style={{left:'38%'}}>{header[resuCreateStep]}</div>
             <div className='absolute right-1'>
               <Button
                 name='Next-->'
@@ -92,7 +95,7 @@ const Page = () => {
                 bgColor='bg-white'
                 color='text-blue-500'
                 borderColor='border-slate-300'
-                onClick={onBack}
+                onClick={onNext}
               />
             </div>
           </div>
