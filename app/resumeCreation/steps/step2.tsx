@@ -3,6 +3,7 @@ import CustomizedInput from '@/app/component/input/Input';
 import { useGlobalContext } from '@/app/context/useContext';
 import { FaTrash } from "react-icons/fa";
 import React from 'react'
+import StepContainer from './stepContainer';
 
 type itemType = Object | undefined;
 
@@ -16,23 +17,22 @@ const educationInfo = [
 
 const Step2 = () => {
   const { watch,setValue } = useGlobalContext();
-  const education = watch('Education');
+  const education = watch('education');
 
   const addNew = () => {
     const newEducation = [...education, { school: '', startDate: '', endDate: '', degree: '' }];
-    setValue('Education', newEducation);
+    setValue('education', newEducation);
   }
 
   const deleteSection = (indexToRemove:number) => {
     const updatedEducation = education.filter((item:itemType, index:number) => index !== indexToRemove);
-    setValue('Education',updatedEducation);
+    setValue('education',updatedEducation);
   }
 
   return (
-    <>
-      <div className='h-535 overflow-y-scroll no-scrollbar bg-white mt-2 pb-6'>
+    <StepContainer>
         {education.map((item: itemType, index: number) => (
-          <div className='mt-2'>
+          <div className='mt-2 px-1'>
             <div className='flex flex-row justify-between'>
               <div className='text-md font-bold'>Education {index+1}</div>
               <FaTrash size={18} onClick={()=>deleteSection(index)} className=' cursor-pointer hover:text-red-600'/>
@@ -62,8 +62,7 @@ const Step2 = () => {
               onClick={addNew}
           />
         </div>
-      </div>
-    </>
+    </StepContainer>
   )
 }
 

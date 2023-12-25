@@ -10,6 +10,7 @@ const Navbar = () => {
     return (
         <div
             className='
+                fixed
                 w-full
                 flex
                 flex-row
@@ -17,7 +18,7 @@ const Navbar = () => {
                 p-3
                 border-b-2
                 border-gray-00
-            bg-neutral-100
+              bg-neutral-100
             '
         >
             <div className='flex flex-row items-center justify-center'>

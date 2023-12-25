@@ -1,6 +1,8 @@
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { HTMLInputTypeAttribute } from "react";
+import SimpleMDE from "react-simplemde-editor";
+// import "easymde/dist/easymde.min.css";
 
 interface InputWithLabelProps {
     label?:string;
@@ -17,10 +19,15 @@ interface InputWithLabelProps {
     multiple?:boolean;
     addtionalText?:string;
     link?:React.ReactElement;
+    options?:EasyMDE.Options | undefined
 }
 
+const options = {
+    minHeight: "160px", 
+};
+
 const CustomizedTextArea:React.FC<InputWithLabelProps> = (props) => {
-    const { label,inputID,placeHolder,shadow,textSize,textColor,otherStyle,width,bgColor,height,addtionalText,link } = props;
+    const { label,inputID,shadow,textSize,textColor,otherStyle,width,addtionalText,link, options } = props;
     return (
         <div 
             className={`
@@ -55,7 +62,7 @@ const CustomizedTextArea:React.FC<InputWithLabelProps> = (props) => {
                         </div>
                 </Label>
             </div>
-            <Textarea id={inputID} placeholder={placeHolder} className={`${bgColor?bgColor:''} ${height?height:''}`}/>
+            <SimpleMDE options={options}/>
         </div>
 
     )

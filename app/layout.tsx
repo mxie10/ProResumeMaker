@@ -24,7 +24,9 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <ContextProvider>
         <div className="bg-neutral-50 min-h-screen flex flex-col relative">
           <Navbar />
-          {children}
+          <div className="mt-16">
+            {children}
+          </div>
           {/* <Footer/> */}
         </div>
       </ContextProvider>

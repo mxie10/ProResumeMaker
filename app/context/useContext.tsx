@@ -26,20 +26,21 @@ export const ContextProvider: React.FC<{ children: ReactNode }> = ({ children })
         reset
     } = useForm<FieldValues>({
         defaultValues:{
-            FirstName: '',
-            MiddleName: 'null',
-            LastName: '',
-            Email: '',
-            Phone: '',
-            City: '',
-            State:'',
-            Province: '',
-            Country: '',
-            ZipCode: '',
-            DoB: '',
-            Age: '',
-            Summery:'',
-            Education:[{school:'',startDate:'',endDate:'',degree:''}]
+            firstName: '',
+            middleName: 'null',
+            lastName: '',
+            email: '',
+            phone: '',
+            city: '',
+            state:'',
+            province: '',
+            country: '',
+            zipCode: '',
+            dob: '',
+            age: '',
+            summery:'',
+            education:[{school:'',startDate:'',endDate:'',degree:''}],
+            workExperience:[{company:'',jobTitle:'',startDate:'',endDate:'',description:''}]
         }
     })
 

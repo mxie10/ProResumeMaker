@@ -38,7 +38,7 @@ const CustomizedInput:React.FC<InputWithLabelProps> = (props) => {
                 >
                     {label}
             </Label>
-            <Input type={inputType} id={inputID} placeholder={placeHolder} className={`${bgColor?bgColor:''}`}/>
+            <Input type={inputType} id={inputID} placeholder={placeHolder} className={`${bgColor?bgColor:''} border-neutral-300`}/>
         </div>
 
     )

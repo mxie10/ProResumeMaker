@@ -6,16 +6,23 @@ import { orange } from '@mui/material/colors';
 
 const steps = [
     'Personal Details',
-    'Education',
     'Work Experience',
-    'Project Experience',
+    'Professional Summary',
+    'Education',
     'Skills',
   ];
   
-const CustomizedStepper = () => {
+interface CustomizedStepperProps {
+  activeStep?:number;
+}
+  
+const CustomizedStepper:React.FC<CustomizedStepperProps> = (props) => {
+
+    const {activeStep} = props;
+
     return (
       <Box sx={{ width: '100%' }}>
-        <Stepper activeStep={0} alternativeLabel>
+        <Stepper activeStep={activeStep} alternativeLabel>
           {steps.map((label) => (
             <Step key={label}>
               <StepLabel>

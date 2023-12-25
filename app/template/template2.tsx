@@ -21,37 +21,37 @@ const Template2: React.FC<Template1Props> = ({
                     flex
                     shadow-md
                     w-full
-                    min-h-[650px]
+                    min-h-[690px]
                     border-solid
                     border-2
                     pb-2
                 '
         >
-            <div className='flex flex-row w-full h-full'>
-                <div className={`w-1/3 ${tempbgcolor?tempbgcolor:' bg-orange-700'} px-2`}>
+            <div className='flex flex-row justify-between'>
+                <div className={`w-1/3 ${tempbgcolor?tempbgcolor:' bg-gray-600'} px-2 h-full`}>
                     <div className='mt-5 ml-2'>
                         {/* candidate name */}
-                        <div className='text-xl flex flex-col text-white'>
+                        <div className='text-lg flex flex-col text-white'>
                             <div className='font-bold'>Contact</div>
                         </div>
                         {/* job title and contact info */}
-                        <div className='text-white text-sm'>
+                        <div className='text-white text-xs'>
                             <div className='mt-2'>xieyz12@gmail.com</div>
                             <div>(283)7773625</div>
                         </div>
                          {/* Education */}
                          <div className='text-white mt-9'>
-                            <div className='text-xl'>Education</div>
-                            <div className='text-sm font-bold'>Centenial College</div>
-                            <div className='text-sm'>
+                            <div className='text-lg'>Education</div>
+                            <div className='text-xs font-bold'>Centenial College</div>
+                            <div className='text-xs'>
                                 <div>September 2022 to May 2023</div>
                                 <div>Graduate Certificate</div>
                             </div>
                         </div>
                         {/* skills */}
                         <div className='text-white mt-9'>
-                            <div className='text-xl'>Skills</div>
-                            <div className='text-sm'>
+                            <div className='text-lg'>Skills</div>
+                            <div className='text-xs'>
                                 <div>React</div>
                                 <div>Javascript</div>
                                 <div>Typescript</div>
@@ -115,14 +115,14 @@ In my career.
                                     <li>• Worked extensively in managing database with using MongoDB, SQL Server and Firebase.</li>
                                 </ol>
                             </div>
-                            <div className='flex flex-col text-xs'>
+                            {/* <div className='flex flex-col text-xs'>
                                 <div>Sogotrade | Nov 2019 - present</div>
                                 <div className='font-bold text-xs'>Project Name 5</div>
                                 <ol>
                                     <li>• Extensively understanding in creating and managing Components, Screens, CSS with using React.</li>
                                     <li>• Worked extensively in managing database with using MongoDB, SQL Server and Firebase.</li>
                                 </ol>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>

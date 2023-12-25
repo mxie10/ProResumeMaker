@@ -1,13 +1,13 @@
 'use client';
 
-import React, { useRef, useState } from "react";
-import { SwitchTransition, CSSTransition } from "react-transition-group";
-import { Alert, Button, Container, Form } from "react-bootstrap";
+// import React, { useRef, useState } from "react";
+// import { SwitchTransition, CSSTransition } from "react-transition-group";
+// import { Alert, Button, Container, Form } from "react-bootstrap";
 
 
-const modes = ["out-in", "in-out"];
+// const modes = ["out-in", "in-out"];
 
-export default function App() {
+// export default function App() {
 
 // const userData = {
 //   job: [
@@ -96,49 +96,104 @@ export default function App() {
 // }
 
 
-const [showButton, setShowButton] = useState(true);
-  const [showMessage, setShowMessage] = useState(false);
-  const nodeRef = useRef(null);
+// const [showButton, setShowButton] = useState(true);
+//   const [showMessage, setShowMessage] = useState(false);
+//   const nodeRef = useRef(null);
+//   return (
+//     <Container style={{ paddingTop: '2rem' }}>
+//       {showButton && (
+//         <Button
+//           onClick={() => setShowMessage(true)}
+//           size="lg"
+//         >
+//           Show Message
+//         </Button>
+//       )}
+//       <CSSTransition
+//         in={showMessage}
+//         nodeRef={nodeRef}
+//         timeout={300}
+//         classNames="alert"
+//         unmountOnExit
+//         onEnter={() => setShowButton(false)}
+//         onExited={() => setShowButton(true)}
+//       >
+//         <Alert
+//           ref={nodeRef}
+//           variant="primary"
+//           dismissible
+//           onClose={() => setShowMessage(false)}
+//         >
+//           <Alert.Heading>
+//             Animated alert message
+//           </Alert.Heading>
+//           <p>
+//             This alert message is being transitioned in and
+//             out of the DOM.
+//           </p>
+//           <Button
+//             variant="primary"
+//             onClick={() => setShowMessage(false)}
+//           >
+//             Close
+//           </Button>
+//         </Alert>
+//       </CSSTransition>
+//     </Container>
+//   );
+// }
+
+import React, { useState, useEffect } from 'react';
+
+const TextEditor = ({ text }:{text:any}) => {
+  const [pages, setPages] = useState<string[]>([]);
+
+  useEffect(() => {
+    if (text === undefined) {
+      return;
+    }
+
+    const pageHeight = 500; // 页面高度
+    const words:any = text.split(' ');
+    let currentPage:Array<string>[] = [];
+    let currentHeight = 0;
+
+    words.forEach((word: any[]) => {
+      // 假设每个单词的高度是固定的，实际上你可能需要更复杂的逻辑来处理不同字体、字号等的情况
+      const wordHeight = 20; // 单词高度
+
+      if (currentHeight + wordHeight > pageHeight) {
+        setPages(prevPages => [...prevPages, currentPage.join(' ')]); // 分页
+        currentPage = [word];
+        currentHeight = wordHeight;
+      } else {
+        currentPage.push(word);
+        currentHeight += wordHeight;
+      }
+    });
+
+    if (currentPage.length > 0) {
+      setPages(prevPages => [...prevPages, currentPage.join(' ')]); // 添加最后一页
+    }
+  }, [text]);
+
   return (
-    <Container style={{ paddingTop: '2rem' }}>
-      {showButton && (
-        <Button
-          onClick={() => setShowMessage(true)}
-          size="lg"
-        >
-          Show Message
-        </Button>
-      )}
-      <CSSTransition
-        in={showMessage}
-        nodeRef={nodeRef}
-        timeout={300}
-        classNames="alert"
-        unmountOnExit
-        onEnter={() => setShowButton(false)}
-        onExited={() => setShowButton(true)}
-      >
-        <Alert
-          ref={nodeRef}
-          variant="primary"
-          dismissible
-          onClose={() => setShowMessage(false)}
-        >
-          <Alert.Heading>
-            Animated alert message
-          </Alert.Heading>
-          <p>
-            This alert message is being transitioned in and
-            out of the DOM.
-          </p>
-          <Button
-            variant="primary"
-            onClick={() => setShowMessage(false)}
-          >
-            Close
-          </Button>
-        </Alert>
-      </CSSTransition>
-    </Container>
+    <div className="page">
+      {pages.map((page, index) => (
+        <div className=' bg-red-300 mt-10'>
+          <p key={index}>{page}</p>
+        </div>
+      ))}
+    </div>
   );
+};
+
+const Page = () => {
+  const text = 'I have had both consoles and PC, both connected to the same TV, using both from couch. Console is only for exclusives though, since PC offers me higher quality of experience and I can afford it. That higher quality comes with higher price for hardware (though lower for software) and bit more fiddling with graphics options. But yeah the positives vastly outweigh negatives.I have had both consoles and PC, both connected to the same TV, using both from couch. Console is only for exclusives though, since PC offers me higher quality of experience and I can afford it. That higher quality comes with higher price for hardware (though lower for software) and bit more fiddling with graphics options. But yeah the positives vastly outweigh negatives.I have had both consoles and PC, both connected to the same TV, using both from couch. Console is only for exclusives though, since PC offers me higher quality of experience and I can afford it. That higher quality comes with higher price for hardware (though lower for software) and bit more fiddling with graphics options. But yeah the positives vastly outweigh negatives.I have had both consoles and PC, both connected to the same TV, using both from couch. Console is only for exclusives though, since PC offers me higher quality of experience and I can afford it. That higher quality comes with higher price for hardware (though lower for software) and bit more fiddling with graphics options. But yeah the positives vastly outweigh negatives.I have had both consoles and PC, both connected to the same TV, using both from couch. Console is only for exclusives though, since PC offers me higher quality of experience and I can afford it. That higher quality comes with higher price for hardware (though lower for software) and bit more fiddling with graphics options. But yeah the positives vastly outweigh negatives.I have had both consoles and PC, both connected to the same TV, using both from couch. Console is only for exclusives though, since PC offers me higher quality of experience and I can afford it. That higher quality comes with higher price for hardware (though lower for software) and bit more fiddling with graphics options. But yeah the positives vastly outweigh negatives.';
+  return (
+    <TextEditor text={text}/>
+  )
 }
+
+export default Page;
+

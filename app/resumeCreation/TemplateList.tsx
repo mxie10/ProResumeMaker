@@ -2,7 +2,7 @@ import templatesList from '../static/template';
 
 const TemplateList = () => {
     return (
-        <div className="flex flex-col items-center gap-2">
+        <div className="flex flex-col items-center gap-1">
             {templatesList.map((item)=>{
                 return (
                     <div className='border-2 border-slate-400'>

@@ -21,7 +21,6 @@ import {
 } from '@react-spring/web'
 import { IconType } from "react-icons";
 
-
 enum STEP {
   OnBoarding = 0,
   AIOrManuallyGenerate = 1,
@@ -38,7 +37,6 @@ interface TransitionItem {
 const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
 
   const [step, setStep] = useState(STEP.OnBoarding);
-  const [prevDirection, setPreDirection] = useState(STEP.OnBoarding);
   const [category, setCategory] = useState("");
   const bodyRef = useRef<HTMLDivElement | null>(null);
   const [animateTemplate, setAnimateTemplate] = useState(false)
