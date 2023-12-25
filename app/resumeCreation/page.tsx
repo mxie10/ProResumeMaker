@@ -11,10 +11,11 @@ import Step1 from './steps/step1';
 import CustomizedStepper from './customStepper';
 import Step2 from './steps/step2';
 import { useGlobalContext } from '../context/useContext';
+import Step4 from './steps/step4';
 import Step3 from './steps/step3';
 
 enum STEP {
-  Summary = 0,
+  PersonalDetails = 0,
   WorkExperience = 1,
   ProfessionalSummary = 2,
   Education = 3,
@@ -63,15 +64,21 @@ const Page = () => {
     <Step1/>
   )
 
-  if(resuCreateStep === STEP.Education){
+  if(resuCreateStep === STEP.WorkExperience){
     stepBody = (
       <Step2/>
     )
   }
 
-  if(resuCreateStep === STEP.WorkExperience){
+  if(resuCreateStep === STEP.ProfessionalSummary){
     stepBody = (
       <Step3/>
+    )
+  }
+
+  if(resuCreateStep === STEP.Education){
+    stepBody = (
+      <Step4/>
     )
   }
 

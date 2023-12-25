@@ -9,7 +9,7 @@ const steps = [
     'Work Experience',
     'Professional Summary',
     'Education',
-    'Skills',
+    'Professional Skills',
   ];
   
 interface CustomizedStepperProps {
