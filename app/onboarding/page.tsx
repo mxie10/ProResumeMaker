@@ -64,7 +64,6 @@ const Page:React.FC<{ open: boolean; templateList: TransitionItem[] }> = () => {
 
   const onChosen = (category: string) => {
     setCategory(category);
-    console.log('category is:'+category);
   }
 
   useChain(animateTemplate ? [springApi, transApi] : [transApi, springApi], [

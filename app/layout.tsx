@@ -5,6 +5,7 @@ import Navbar from "./component/navbar/Navbar";
 import Footer from "./component/Footer";
 import { ContextProvider } from "./context/useContext";
 import "./globals.css";
+import OptimizeExpModel from "./models/OptimizeExpModel";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -24,6 +25,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <ContextProvider>
         <div className="bg-neutral-50 min-h-screen flex flex-col relative">
           <Navbar />
+          <OptimizeExpModel/>
           <div className="mt-16">
             {children}
           </div>
@@ -35,7 +37,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
 
   return (
     <html lang="en">
-      <body className="min-h-screen flex flex-col">
+      <body className="min-h-screen flex flex-col relative">
         {user ? <LayoutBody /> : <Register />}
       </body>
     </html>

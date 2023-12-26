@@ -2,11 +2,9 @@ import CustomizedButton from '@/app/component/input/Button';
 import CustomizedInput from '@/app/component/input/Input';
 import { useGlobalContext } from '@/app/context/useContext';
 import { FaTrash } from "react-icons/fa";
-import SimpleMDE from "react-simplemde-editor";
-import "easymde/dist/easymde.min.css";
-import React from 'react';
 import StepContainer from './stepContainer';
 import CustomizedTextArea from '@/app/component/input/TextArea';
+import useOptimizeExpModel from '@/app/hooks/useOptimizeExpModel';
 
 type itemType = Object | undefined;
 
@@ -20,7 +18,8 @@ const workExperienceInfo = [
 const Step2 = () => {
   const { watch,setValue } = useGlobalContext();
   const workExperience = watch('workExperience');
-
+  const optimizeExpModel = useOptimizeExpModel();
+  
   const addNew = () => {
     const newWorkExp = [...workExperience, { company:'',jobTitle:'',startDate:'',endDate:'',description:'' }];
     setValue('workExperience', newWorkExp);
@@ -36,20 +35,26 @@ const Step2 = () => {
     placeholder:'We highly recommend leveraging AI to enhance your professional experience summary, encompassing the correction of grammar errors, optimization of work history, and improvement of overall readability.'
   };
 
+  const openOptimizeExpModel = () => {
+    
+    optimizeExpModel.onOpen();
+    console.log("open?",optimizeExpModel.isOpen);
+  }
+
   const linkToAIOptimization = (
-    <div className='text-blue-500 cursor-pointer font-bold'>AI Optimization</div>
+    <div className='text-blue-500 cursor-pointer font-bold' onClick={openOptimizeExpModel}>AI Optimization</div>
   )
 
   return (
     <StepContainer>
         {workExperience.map((item: itemType, index: number) => (
-          <div className='mt-2 px-1'>
+          <div className='mt-2 px-1' key={index}>
             <div className='flex flex-row justify-between'>
               <div className='text-md font-bold'>Experience {index+1}</div>
               <FaTrash size={18} onClick={()=>deleteSection(index)} className=' cursor-pointer hover:text-red-600'/>
             </div>
             <div className='flex flex-row justify-between flex-wrap'>
-              {workExperienceInfo.map((item,index)=>(
+              {workExperienceInfo && workExperienceInfo.map((item,index)=>(
                   <CustomizedInput 
                       key={index} 
                       label={item.title} 
@@ -69,6 +74,7 @@ const Step2 = () => {
                     addtionalText='Get stucked? Try  '
                     link={linkToAIOptimization}
                     options={options}
+                        
                 />
             </div>
           </div>

@@ -2,7 +2,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { HTMLInputTypeAttribute } from "react";
 import SimpleMDE from "react-simplemde-editor";
-// import "easymde/dist/easymde.min.css";
+import "easymde/dist/easymde.min.css";
 
 interface InputWithLabelProps {
     label?:string;

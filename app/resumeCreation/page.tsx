@@ -7,12 +7,12 @@ import { FaRegCheckCircle } from "react-icons/fa";
 import { FaExternalLinkAlt } from "react-icons/fa";
 import Button from '../component/input/Button';
 import TemplateList from './TemplateList';
-import Step1 from './steps/step1';
 import CustomizedStepper from './customStepper';
 import Step2 from './steps/step2';
 import { useGlobalContext } from '../context/useContext';
 import Step4 from './steps/step4';
 import Step3 from './steps/step3';
+import Step1 from './steps/step1';
 
 enum STEP {
   PersonalDetails = 0,
@@ -27,7 +27,7 @@ const Page = () => {
   const { resuCreateStep, setResuCreateStep } = useGlobalContext();
   const { toPDF, targetRef } = usePDF({ filename: 'test.pdf' });
 
-  const header = ['Personal Details','Work Experience','Professional Summary','Education','Professional Skills'];
+  const header = ['Personal Details', 'Work Experience', 'Professional Summary', 'Education', 'Professional Skills'];
 
   const options: Options = {
     page: {
@@ -41,10 +41,10 @@ const Page = () => {
   };
 
   useEffect(() => {
-    setTimeout(()=>{
+    setTimeout(() => {
       setIsLoading(false);
     },
-    1000)
+      1000)
   }, [isLoading])
 
 
@@ -53,39 +53,39 @@ const Page = () => {
   };
 
   const onNext = () => {
-    setResuCreateStep((step)=>step+1);
+    setResuCreateStep((step) => step + 1);
   }
 
   const onBack = () => {
-    setResuCreateStep((step)=>step-1);
+    setResuCreateStep((step) => step - 1);
   }
 
   let stepBody = (
-    <Step1/>
+    <Step2 />
   )
 
-  if(resuCreateStep === STEP.WorkExperience){
-    stepBody = (
-      <Step2/>
-    )
-  }
+  // if (resuCreateStep === STEP.WorkExperience) {
+  //   stepBody = (
+  //     <Step2 />
+  //   )
+  // }
 
-  if(resuCreateStep === STEP.ProfessionalSummary){
-    stepBody = (
-      <Step3/>
-    )
-  }
+  // if (resuCreateStep === STEP.ProfessionalSummary) {
+  //   stepBody = (
+  //     <Step3 />
+  //   )
+  // }
 
-  if(resuCreateStep === STEP.Education){
-    stepBody = (
-      <Step4/>
-    )
-  }
+  // if (resuCreateStep === STEP.Education) {
+  //   stepBody = (
+  //     <Step4 />
+  //   )
+  // }
 
   const bodyConent = (
     <div className='relative'>
       {/* left side */}
-      <div 
+      <div
         className='
           lg:fixed 
           w-full 
@@ -97,35 +97,33 @@ const Page = () => {
           h-screen
         '
       >
-        <div className='mt-2' style={{height:'10%'}}>
-          <CustomizedStepper activeStep={resuCreateStep}/>
+        <div className='mt-2' style={{ height: '10%' }}>
+          <CustomizedStepper activeStep={resuCreateStep} />
         </div>
-        <div 
+        <div
           className='
               w-full 
               px-10 
-              mt-2 
+              mt-2
               shadow-lg 
               rounded-md 
               border-2
             bg-white
             '
-          style={{height:'79%'}}
-          >
-          <div 
+          style={{ height: '79%' }}
+        >
+          <div
             className='
                 h-auto 
                 flex 
                 flex-row 
-                justify-between 
+                justify-between
                 items-center 
                 py-2 
-                relative 
-                mt-6
               '
-            >
-            {resuCreateStep!==0? 
-              <div className='absolute left-1'>
+          >
+            {resuCreateStep === 0 ? 
+              <div className='invisible'>
                 <Button
                   name='<--Back'
                   width='w-28'
@@ -134,29 +132,37 @@ const Page = () => {
                   color='text-blue-500'
                   borderColor='border-slate-300'
                   onClick={onBack}
-              /></div>:null
-            }
-            <div className='hidden lg:block font-bold text-lg absolute' style={{left:'38%'}}>{header[resuCreateStep]}</div>
-            <div className='absolute right-1'>
-              <Button
-                name='Next-->'
-                width='w-28'
-                height='h-8'
-                bgColor='bg-white'
-                color='text-blue-500'
-                borderColor='border-slate-300'
-                onClick={onNext}
               />
-            </div>
+              </div>:
+                <Button
+                  name='<--Back'
+                  width='w-28'
+                  height='h-8'
+                  bgColor='bg-white'
+                  color='text-blue-500'
+                  borderColor='border-slate-300'
+                  onClick={onBack}
+                />
+            }
+            <div className='hidden lg:block font-bold text-lg'>{header[resuCreateStep]}</div>
+            <Button
+              name='Next-->'
+              width='w-28'
+              height='h-8'
+              bgColor='bg-white'
+              color='text-blue-500'
+              borderColor='border-slate-300'
+              onClick={onNext}
+            />
           </div>
-          <div className='mt-5' style={{height:'100%'}}>
+          <div className='mt-2' style={{ height: '100%' }}>
             {stepBody}
           </div>
         </div>
       </div>
 
       {/* right side */}
-      <div 
+      <div
         className='
             fixed 
             h-screen
@@ -168,9 +174,9 @@ const Page = () => {
             lg:flex-row 
             pr-6
           '
-        >
+      >
         <div className='w-4/5'>
-          <div className='overflow-auto border-2 rounded-md mt-2 p-1 bg-neutral-200' style={{height:'87%'}}>
+          <div className='overflow-auto border-2 rounded-md mt-2 p-2 bg-neutral-100' style={{ height: '87%' }}>
             <Template2 />
           </div>
           <div className='flex flex-row justify-between'>
@@ -181,14 +187,15 @@ const Page = () => {
                 flex-row 
                 items-center 
                 gap-1 
-                mt-1'
+                mt-0
+              '
             >
-              <FaRegCheckCircle />
+              <FaRegCheckCircle size={12}/>
               <div>Saved</div>
             </div>
           </div>
         </div>
-        <div className='flex flex-col w-1/4 px-2 gap-1'  style={{height:'90%'}}>
+        <div className='flex flex-col w-1/4 px-2 gap-1' style={{ height: '90%' }}>
           <div className='mt-2'>
             <Button
               border='border-2'
@@ -219,12 +226,12 @@ const Page = () => {
 
   return (
     <div className='w-full h-screen'>
-      {isLoading ? 
+      {isLoading ?
         <div className='flex items-center justify-center h-screen'>
-          <ReactLoading height={25} width={70} color="#000000"/>
+          <ReactLoading height={25} width={70} color="#000000" />
         </div>
-      :bodyConent
-    }
+        : bodyConent
+      }
     </div>
   )
 }

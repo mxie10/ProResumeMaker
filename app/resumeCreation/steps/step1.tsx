@@ -6,7 +6,7 @@ import {
     AccordionContent,
     AccordionItem,
     AccordionTrigger,
-} from "@/components/ui/accordion"
+} from "@/components/ui/accordion";
 import StepContainer from './stepContainer';
 
 const primaryInfo = [
@@ -31,7 +31,7 @@ const Step1 = () => {
     return (
         <StepContainer>
             <div className='flex flex-row flex-wrap justify-between px-1'>
-                {primaryInfo.map((item, index) => (
+                {primaryInfo && primaryInfo.map((item, index) => (
                     <CustomizedInput
                         key={index}
                         label={item.title}
@@ -44,7 +44,7 @@ const Step1 = () => {
             </div>
             <div className='text-blue-500 mt-3 border-b-2 text-md'>Additional Info</div>
             <div className='flex flex-row flex-wrap justify-between px-1'>
-                {additionalInfo.map((item, index) => (
+                {additionalInfo && additionalInfo.map((item, index) => (
                     <CustomizedInput
                         key={index}
                         label={item.title}
