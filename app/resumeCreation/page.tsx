@@ -211,7 +211,7 @@ const Page = () => {
               icon={FaExternalLinkAlt}
             />
           </div>
-          <div className='bg-neutral-200 rounded-lg overflow-auto p-2'>
+          <div className='bg-neutral-200 rounded-lg overflow-auto p-1'>
             <TemplateList />
           </div>
           <div className='mt-2'>

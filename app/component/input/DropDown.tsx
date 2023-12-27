@@ -3,7 +3,6 @@ import { Button } from "@/components/ui/button";
 import {
     DropdownMenu,
     DropdownMenuContent,
-    DropdownMenuItem,
     DropdownMenuLabel,
     DropdownMenuRadioGroup,
     DropdownMenuRadioItem,
@@ -19,7 +18,7 @@ interface CustomizedDropDownProps {
 }
 
 const CustomizedDropDown: React.FC<CustomizedDropDownProps> = (props) => {
-    const [position, setPosition] = React.useState('1')
+    const [position, setPosition] = React.useState('1');
     const { triggerTitle, menuLabel, menuItem, bgColor } = props;
 
     return (
@@ -37,7 +36,7 @@ const CustomizedDropDown: React.FC<CustomizedDropDownProps> = (props) => {
                         shadow-md
                     `}
                 >
-                    {menuItem && menuItem.length > 0 ? 'Work Experience '+position: 'No Work Experience so far'}
+                    {menuItem && menuItem.length > 0 ? 'Work Experience ' + position : 'No Work Experience so far'}
                 </Button>
             </DropdownMenuTrigger>
             <DropdownMenuContent className="w-56">

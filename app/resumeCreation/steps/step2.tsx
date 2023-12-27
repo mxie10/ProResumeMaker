@@ -42,7 +42,15 @@ const Step2 = () => {
   }
 
   const linkToAIOptimization = (
-    <div className='text-blue-500 cursor-pointer font-bold' onClick={openOptimizeExpModel}>AI Optimization</div>
+    <div 
+      className='
+        text-blue-500 
+        cursor-pointer 
+        font-bold' 
+        onClick={openOptimizeExpModel}
+    >
+          AI Optimization
+    </div>
   )
 
   return (

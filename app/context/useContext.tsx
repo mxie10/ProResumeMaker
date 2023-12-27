@@ -40,7 +40,9 @@ export const ContextProvider: React.FC<{ children: ReactNode }> = ({ children })
             age: '',
             summery:'',
             education:[{school:'',startDate:'',endDate:'',degree:''}],
-            workExperience:[{company:'',jobTitle:'',startDate:'',endDate:'',description:''}]
+            workExperience:[
+                {company:'company 1',jobTitle:'',startDate:'',endDate:'',description:''},
+            ]
         }
     })
 

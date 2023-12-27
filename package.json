@@ -34,6 +34,7 @@
     "react-hook-form": "^7.49.2",
     "react-icons": "^4.11.0",
     "react-loading": "^2.0.3",
+    "react-select": "^5.8.0",
     "react-simplemde-editor": "^5.2.0",
     "react-spring": "^9.7.3",
     "react-to-pdf": "^1.0.1",
