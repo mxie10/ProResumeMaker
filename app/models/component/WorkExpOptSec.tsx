@@ -25,48 +25,52 @@ const WorkExpOptSec:React.FC<WorkExpOptSecProps> = (props) => {
             <div className='text-sky-600 font-bold border-b-2 text-lg'>
                 Work Experience {expIndex + 1}
             </div>
-            <div className='text-md font-bold mt-1'>
-                Add Pre-Generated Phrase<span className=' text-neutral-500'>(Optional)</span>
-            </div>
-            <div className='text-sm text-neutral-500'>
-                Utilizes AI to craft brief, impactful phrases summarizing your work experiences. Effortlessly communicate your career highlights and expertise with tailored precision.
-            </div>
-            <div
-                className='
-                h-300 
-                overflow-auto 
-                w-full 
-                rounded-lg
-                p-2
-                bg-neutral-100
-                mt-1
-                shadow-md
-              '
-            >
-                {/* {item.generatedPhrase.map((phrase: string, phraseIndex:number) => {
-                return <Phrase content={phrase} key={uuidv4()} />
-              })} */}
-                <Phrase key={uuidv4()} />
-                <Phrase key={uuidv4()} />
-                <Phrase key={uuidv4()} />
-                <Phrase key={uuidv4()} />
-                <Phrase key={uuidv4()} />
-            </div>
-            <div className='absolute right-1 flex flex-row items-center mt-2 text-sky-600'>
-                <span className='text-neutral-500 font-bold'>
-                    Don't satisfy with it?
-                </span>
-                <IoRefreshCircleSharp size={21} className='cursor-pointer' />
-            </div>
-            <div className='font-bold mt-5'>
-                Deep Customize Your Preference <span className=' text-neutral-500'>(Recommand)</span>
-            </div>
-            <div className='text-sm text-neutral-500'>
-                Utilizes AI to craft brief, impactful phrases summarizing your work experiences. Effortlessly communicate your career highlights and expertise with tailored precision.
-            </div>
+            {/* Add Pre-Generated Phrase section */}
             <div className='mt-1'>
-                <Selector />
+                <div className='text-md font-bold'>
+                    Add Pre-Generated Phrase<span className=' text-neutral-500'>(Optional)</span>
+                </div>
+                <div className='text-sm text-neutral-500'>
+                    Utilizes AI to craft brief, impactful phrases summarizing your work experiences. Effortlessly communicate your career highlights and expertise with tailored precision.
+                </div>
+                <div
+                    className='
+                    h-300 
+                    overflow-auto 
+                    w-full 
+                    rounded-lg
+                    p-2
+                    bg-neutral-100
+                    mt-1
+                    shadow-md
+                '
+                >
+                    <Phrase key={uuidv4()} />
+                    <Phrase key={uuidv4()} />
+                    <Phrase key={uuidv4()} />
+                    <Phrase key={uuidv4()} />
+                    <Phrase key={uuidv4()} />
+                </div>
+                <div className='absolute right-1 flex flex-row items-center mt-2 text-sky-600'>
+                    <span className='text-neutral-500 font-bold'>
+                        Don't satisfy with it?
+                    </span>
+                    <IoRefreshCircleSharp size={21} className='cursor-pointer' />
+                </div>
             </div>
+            {/* Deep Customize Your Preference section */}
+            <div className='mt-5'>
+                <div className='font-bold'>
+                    Deep Customize Your Preference <span className=' text-neutral-500'>(Recommand)</span>
+                </div>
+                <div className='text-sm text-neutral-500'>
+                    Utilizes AI to craft brief, impactful phrases summarizing your work experiences. Effortlessly communicate your career highlights and expertise with tailored precision.
+                </div>
+                <div className='mt-1'>
+                    <Selector />
+                </div>
+            </div>
+            {/* Submit button */}
             <div className='mt-2'>
                 <CustomizedButton
                     name='Start Optimizing'

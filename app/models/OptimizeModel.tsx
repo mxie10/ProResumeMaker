@@ -1,20 +1,20 @@
-import React from 'react'
-import useOptimizeExpModel from '../hooks/useOptimizeExpModel';
+import React, { useEffect, useState } from 'react'
 import { IoMdCloseCircle } from "react-icons/io";
 
-interface OptimizeModel {
+interface OptimizeModelProps {
   body?:React.ReactElement;
+  isOpen?:boolean;
+  onClose?:() => void;
 }
 
-const OptimizeModel:React.FC<OptimizeModel> = (props) => {
+const OptimizeModel:React.FC<OptimizeModelProps> = (props) => {
+  const {body,isOpen,onClose} = props;
+  const [showModal, setShowModal] = useState(isOpen);
+  const modalClasses = showModal? '-translate-x-full'  : 'translate-x-0';
 
-  const {body} = props;
-  const optimizeExpModel = useOptimizeExpModel();
-  const modalClasses = optimizeExpModel.isOpen ? '-translate-x-full'  : 'translate-x-0';
-
-  const onClose = () => {
-    optimizeExpModel.onClose();
-  }
+  useEffect(()=>{
+    setShowModal(isOpen);
+  },[isOpen])
 
   return (
     <>
@@ -40,7 +40,7 @@ const OptimizeModel:React.FC<OptimizeModel> = (props) => {
           bg-white
         `}>
           <div className='mt-2 ml-2 cursor-pointer w-full'>
-            <IoMdCloseCircle size={20} onClick={onClose} />
+            <IoMdCloseCircle size={20} onClick={()=>onClose?.()} />
           </div>
           {body}
       </div>

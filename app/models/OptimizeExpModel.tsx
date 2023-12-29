@@ -1,7 +1,8 @@
 import React from 'react'
-import OptimizeModel from './OptimizeModel';
 import { useGlobalContext } from '../context/useContext';
 import WorkExpOptSec from './component/WorkExpOptSec';
+import useOptimizeExpModel from '../hooks/useOptimizeExpModel';
+import OptimizeModel from './OptimizeModel';
 
 type WorkExperience = {
   company: string;
@@ -16,8 +17,9 @@ const OptimizeExpModel = () => {
 
   const { watch, setValue } = useGlobalContext();
   const workExperience = watch('workExperience');
+  const optimizeExpModel = useOptimizeExpModel();
 
-  const phraseBody = (
+  const mainBody = (
     <>
       {workExperience.map((item: WorkExperience, expIndex: number) => {
         return (
@@ -29,7 +31,11 @@ const OptimizeExpModel = () => {
     </>
   )
 
-  const body = (
+  const onClose = () => {
+    optimizeExpModel.onClose();
+  }
+
+  const bodyContent = (
     <div className='flex flex-col'>
       <div className='flex flex-col w-full h-screen' >
         <div
@@ -47,7 +53,7 @@ const OptimizeExpModel = () => {
         </div>
         <div className='px-4 py-2 overflow-auto' style={{ height: '90%' }}>
           <div className=''>
-            {phraseBody}
+            {mainBody}
           </div>
         </div>
       </div>
@@ -56,7 +62,9 @@ const OptimizeExpModel = () => {
 
   return (
     <OptimizeModel
-      body={body}
+      body={bodyContent}
+      isOpen={optimizeExpModel.isOpen}
+      onClose={onClose}
     />
   )
 }

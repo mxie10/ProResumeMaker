@@ -9,12 +9,18 @@ type ContextType = {
     reset:UseFormReset<FieldValues>,
     resuCreateStep:number,
     setResuCreateStep:Dispatch<SetStateAction<number>>
+    openWorkExpModal:boolean,
+    setOpenWorkExpModal:Dispatch<SetStateAction<boolean>>
+    openOptimizeProExpModel:boolean,
+    setOpenOptimizeProExpModel:Dispatch<SetStateAction<boolean>>
 }
 
 const Context = createContext<ContextType | undefined>(undefined);
 
 export const ContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
     const [resuCreateStep, setResuCreateStep] = useState(0);
+    const [openWorkExpModal, setOpenWorkExpModal] = useState(false);
+    const [openOptimizeProExpModel, setOpenOptimizeProExpModel] = useState(false);
     const {
         register,
         handleSubmit,
@@ -59,7 +65,11 @@ export const ContextProvider: React.FC<{ children: ReactNode }> = ({ children })
         watch:watch,
         reset:reset,
         resuCreateStep:resuCreateStep,
-        setResuCreateStep:setResuCreateStep
+        setResuCreateStep:setResuCreateStep,
+        openWorkExpModal:openWorkExpModal,
+        setOpenWorkExpModal:setOpenWorkExpModal,
+        openOptimizeProExpModel:openOptimizeProExpModel,
+        setOpenOptimizeProExpModel:setOpenOptimizeProExpModel
     };
   
     return <Context.Provider value={contextValue}>{children}</Context.Provider>;

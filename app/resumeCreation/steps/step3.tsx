@@ -1,11 +1,24 @@
 import React from 'react'
 import StepContainer from './stepContainer';
 import CustomizedTextArea from '@/app/component/input/TextArea';
+import useOptmizeProSummaryModel from '@/app/hooks/useOptmizeProSummaryModel';
 
 const step3 = () => {
+    const optimizeEXProSummaryModel = useOptmizeProSummaryModel();
+
+    const openOptimizeProExpModel = () => {
+        
+        optimizeEXProSummaryModel.onOpen();
+        // console.log("optimizeEXProSummaryModel.onOpen:",optimizeEXProSummaryModel.isOpenProSummaryModel);
+    }
 
     const linkToAIOptimization = (
-        <div className='text-blue-500 cursor-pointer font-bold'>AI Optimization</div>
+        <div 
+            className='text-blue-500 cursor-pointer font-bold' 
+            onClick={openOptimizeProExpModel}
+        >
+            AI Optimization
+        </div>
     )
 
     const options = {

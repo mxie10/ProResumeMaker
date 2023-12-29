@@ -4,9 +4,10 @@ import { Inter as FontSans } from "next/font/google";
 import Navbar from "./component/navbar/Navbar";
 import Footer from "./component/Footer";
 import { ContextProvider } from "./context/useContext";
-import "./globals.css";
 import OptimizeExpModel from "./models/OptimizeExpModel";
 import ReviewWorkExpOptResModel from "./models/ReviewWorkExpOptResModel";
+import OptmizeProSummaryModel from "./models/OptmizeProSummaryModel";
+import "./globals.css";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -26,12 +27,13 @@ export default function RootLayout({ children }: RootLayoutProps) {
       <ContextProvider>
         <div className="bg-neutral-50 min-h-screen flex flex-col relative">
           <Navbar />
-          <OptimizeExpModel/>
-          <ReviewWorkExpOptResModel/>
           <div className="mt-16">
             {children}
           </div>
           {/* <Footer/> */}
+          <OptimizeExpModel/>
+          <ReviewWorkExpOptResModel/>
+          <OptmizeProSummaryModel/>
         </div>
       </ContextProvider>
     )

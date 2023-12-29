@@ -13,6 +13,9 @@ import { useGlobalContext } from '../context/useContext';
 import Step4 from './steps/step4';
 import Step3 from './steps/step3';
 import Step1 from './steps/step1';
+import useOptimizeExpModel from '../hooks/useOptimizeExpModel';
+import useOptmizeProSummaryModel from '../hooks/useOptmizeProSummaryModel';
+import useOptReviewWorkExpResModel from '../hooks/useOptReviewWorkExpResModel';
 
 enum STEP {
   PersonalDetails = 0,
@@ -25,6 +28,10 @@ enum STEP {
 const Page = () => {
   const [isLoading, setIsLoading] = useState(true);
   const { resuCreateStep, setResuCreateStep } = useGlobalContext();
+  const optimizeExpModel = useOptimizeExpModel();
+  const optmizeProSummaryModel = useOptmizeProSummaryModel();
+  const optReviewWorkExpResModel = useOptReviewWorkExpResModel();
+
   const { toPDF, targetRef } = usePDF({ filename: 'test.pdf' });
 
   const header = ['Personal Details', 'Work Experience', 'Professional Summary', 'Education', 'Professional Skills'];
@@ -54,10 +61,16 @@ const Page = () => {
 
   const onNext = () => {
     setResuCreateStep((step) => step + 1);
+    optimizeExpModel.onClose();
+    optmizeProSummaryModel.onClose();
+    optReviewWorkExpResModel.onClose();
   }
 
   const onBack = () => {
     setResuCreateStep((step) => step - 1);
+    optimizeExpModel.onClose();
+    optmizeProSummaryModel.onClose();
+    optReviewWorkExpResModel.onClose();
   }
 
   let stepBody = (

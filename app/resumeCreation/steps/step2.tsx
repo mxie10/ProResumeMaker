@@ -35,10 +35,8 @@ const Step2 = () => {
     placeholder:'We highly recommend leveraging AI to enhance your professional experience summary, encompassing the correction of grammar errors, optimization of work history, and improvement of overall readability.'
   };
 
-  const openOptimizeExpModel = () => {
-    
+  const openOptimizeExpModel = () => {    
     optimizeExpModel.onOpen();
-    console.log("open?",optimizeExpModel.isOpen);
   }
 
   const linkToAIOptimization = (

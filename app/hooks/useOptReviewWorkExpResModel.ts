@@ -1,15 +1,15 @@
 import { create } from 'zustand';
 
-interface useOptimizeExpModel {
+interface useOptReviewWorkExpResModelProps {
     isOpen: boolean;
     onOpen: () => void;
     onClose: () => void;
 }
 
-const useOptimizeExpModel = create<useOptimizeExpModel>((set)=>({
+const useOptReviewWorkExpResModel = create<useOptReviewWorkExpResModelProps>((set)=>({
     isOpen:false,
     onOpen: () => set({isOpen:true}),
     onClose: () => set({isOpen: false})
 }))
 
-export default useOptimizeExpModel;
+export default useOptReviewWorkExpResModel;
