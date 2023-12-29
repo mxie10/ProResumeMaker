@@ -41,7 +41,13 @@ export const ContextProvider: React.FC<{ children: ReactNode }> = ({ children })
             summery:'',
             education:[{school:'',startDate:'',endDate:'',degree:''}],
             workExperience:[
-                {company:'company 1',jobTitle:'',startDate:'',endDate:'',description:''},
+                {
+                    company:'company 1',
+                    jobTitle:'',
+                    startDate:'',
+                    endDate:'',
+                    description:'work exp 1',
+                },
             ]
         }
     })
@@ -68,4 +74,20 @@ export const ContextProvider: React.FC<{ children: ReactNode }> = ({ children })
   
     return context;
   };
+
+
+//   {
+//     company:'company 1',
+//     jobTitle:'',
+//     startDate:'',
+//     endDate:'',
+//     description:'work exp 3',
+//     generatedPhrase:[
+//         'Designed and implemented application using React with Redux, HTML 5, CSS3 to create professional UI.',
+//         'Designed and implemented application using React with Redux, HTML 5, CSS3 to create professional UI.',
+//         'Designed and implemented application using React with Redux, HTML 5, CSS3 to create professional UI.',
+//         'Designed and implemented application using React with Redux, HTML 5, CSS3 to create professional UI.',
+//         'Designed and implemented application using React with Redux, HTML 5, CSS3 to create professional UI.',
+//     ]
+// },
 

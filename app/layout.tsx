@@ -6,6 +6,7 @@ import Footer from "./component/Footer";
 import { ContextProvider } from "./context/useContext";
 import "./globals.css";
 import OptimizeExpModel from "./models/OptimizeExpModel";
+import ReviewWorkExpOptResModel from "./models/ReviewWorkExpOptResModel";
 
 export const fontSans = FontSans({
   subsets: ["latin"],
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <div className="bg-neutral-50 min-h-screen flex flex-col relative">
           <Navbar />
           <OptimizeExpModel/>
+          <ReviewWorkExpOptResModel/>
           <div className="mt-16">
             {children}
           </div>

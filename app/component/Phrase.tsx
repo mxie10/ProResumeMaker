@@ -1,30 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaCirclePlus } from "react-icons/fa6";
 
 interface PhraseProps {
   content?: string;
+  phraseId?:string;
 }
 
 const Phrase: React.FC<PhraseProps> = (props) => {
-  const { content } = props;
-  const [isClicked, setIsClicked] = useState(false);
+  const { content,phraseId} = props;
+  const [isSelected, setIsSelected] = useState(false);
 
-  const handleOnClick = () => {
-    setIsClicked(true);
+  const handleOnClick = () => {    
+    setIsSelected(true);
   };
 
   return (
-    <>
       <div
         className={`
           p-1
           rounded-lg 
-          border-2 
-          border-neutral-400 
+          border-2
+          border-neutral-300 
           cursor-pointer
-          ${isClicked ? 'text-gray-500' : 'text-sky-600'}
+          bg-white
+          ${isSelected ? 'text-gray-500' : 'text-sky-600'}
         `}
         onClick={handleOnClick}
+        key={phraseId}
       >
         <div className='flex flex-row justify-center'>
           <div className='mt-1'>
@@ -35,7 +37,6 @@ const Phrase: React.FC<PhraseProps> = (props) => {
           </div>
         </div>
       </div>
-    </>
   );
 };
 

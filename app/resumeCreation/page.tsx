@@ -61,26 +61,26 @@ const Page = () => {
   }
 
   let stepBody = (
-    <Step2 />
+    <Step1 />
   )
 
-  // if (resuCreateStep === STEP.WorkExperience) {
-  //   stepBody = (
-  //     <Step2 />
-  //   )
-  // }
+  if (resuCreateStep === STEP.WorkExperience) {
+    stepBody = (
+      <Step2 />
+    )
+  }
 
-  // if (resuCreateStep === STEP.ProfessionalSummary) {
-  //   stepBody = (
-  //     <Step3 />
-  //   )
-  // }
+  if (resuCreateStep === STEP.ProfessionalSummary) {
+    stepBody = (
+      <Step3 />
+    )
+  }
 
-  // if (resuCreateStep === STEP.Education) {
-  //   stepBody = (
-  //     <Step4 />
-  //   )
-  // }
+  if (resuCreateStep === STEP.Education) {
+    stepBody = (
+      <Step4 />
+    )
+  }
 
   const bodyConent = (
     <div className='relative'>
@@ -211,12 +211,14 @@ const Page = () => {
               icon={FaExternalLinkAlt}
             />
           </div>
-          <div className='bg-neutral-200 rounded-lg overflow-auto p-1'>
+          <div className='bg-neutral-200 overflow-auto p-1'>
             <TemplateList />
           </div>
           <div className='mt-2'>
             <Button
               name='View All Templates'
+              bgColor='bg-sky-700'
+              color='text-white'
             />
           </div>
         </div>
